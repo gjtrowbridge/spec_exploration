@@ -1,5 +1,5 @@
+// Many patterns here copied from sigp/lighthouse with some small modifications
 use fixed_hash::{construct_fixed_hash};
-
 
 // Necessary for impl_common macro
 use serde::{Deserialize, Serialize};
@@ -32,4 +32,16 @@ impl_common!(ShardSlot);
 
 construct_fixed_hash! {
     pub struct Root(32);
+}
+
+impl Slot {
+    pub fn new(slot: u64) -> Self {
+        Self(slot)
+    }
+}
+
+impl Epoch {
+    pub fn new(slot: u64) -> Self {
+        Self(slot)
+    }
 }

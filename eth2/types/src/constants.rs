@@ -25,7 +25,7 @@
 //GENESIS_FORK_VERSION = Version('0x00000000')
 //BLS_WITHDRAWAL_PREFIX = Bytes1('0x00')
 
-//// Time Parameters
+// Time Parameters
 //pub const MIN_GENESIS_DELAY: u64 = 86400;
 //pub const SECONDS_PER_SLOT: u64 = 12;
 //pub const MIN_ATTESTATION_INCLUSION_DELAY: u64 = 1;
@@ -34,14 +34,14 @@
 //pub const MAX_SEED_LOOKAHEAD: u64 = 4;
 //pub const MIN_EPOCHS_TO_INACTIVITY_PENALTY: u64 = 4;
 //pub const SLOTS_PER_ETH1_VOTING_PERIOD: u64 = 1024;
-//pub const SLOTS_PER_HISTORICAL_ROOT: u64 = 8192;
+pub const SLOTS_PER_HISTORICAL_ROOT: u64 = 8192;
 //pub const MIN_VALIDATOR_WITHDRAWABILITY_DELAY: u64 = 256;
 //pub const PERSISTENT_COMMITTEE_PERIOD: u64 = 2048;
 
 //// State List Lengths
 //pub const EPOCHS_PER_HISTORICAL_VECTOR: u64 = 65536;
 //pub const EPOCHS_PER_SLASHINGS_VECTOR: u64 = 8192;
-//pub const HISTORICAL_ROOTS_LIMIT: u64 = 16_777_216;
+pub const HISTORICAL_ROOTS_LIMIT: u64 = 16_777_216;
 //pub const VALIDATOR_REGISTRY_LIMIT: u64 = 1_099_511_627_776;
 
 //// Rewards and Penalties
@@ -68,9 +68,9 @@
 // Phase 1 Spec Here:
 // https://github.com/ethereum/eth2.0-specs/blob/dev/specs/phase1/shard-data-chains.md#configuration
 
-//// Misc
-//// Differs from spec link above bc new proposal is to have 64, not 1024, shards
-//pub const SHARD_COUNT: usize = 64;
+// Misc
+// Differs from spec link above bc new proposal is to have 64, not 1024, shards
+pub const SHARD_COUNT: usize = 64;
 //pub const MIN_BLOCK_BODY_PRICE: u64 = 1;
 //pub const MAX_PERIOD_COMMITTEE_SIZE: u64 = 128;
 //pub const SHARD_HEADER_SIZE: u64 = 1024;

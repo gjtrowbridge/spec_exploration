@@ -9,6 +9,7 @@
 members = [
     "eth2/types",
     "eth2/utils/int_to_bytes",
+    "eth2/utils/ssz_types",
     "server",
 ]
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html

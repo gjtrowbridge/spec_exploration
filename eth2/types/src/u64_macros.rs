@@ -1,4 +1,4 @@
-// Copied from sigp/lighthouse (with slight modifications)
+// Copied from sigp/lighthouse with some small modifications
 
 macro_rules! impl_from_into_u64 {
     ($main: ident) => {
