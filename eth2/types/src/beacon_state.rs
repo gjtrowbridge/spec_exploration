@@ -1,6 +1,3 @@
-use crate::constants::{
-    SHARD_COUNT,
-};
 use crate::cross_link::{CrossLink};
 use crate::eth_spec::EthSpec;
 use crate::execution_environment::{ExecutionEnvironment};
@@ -54,3 +51,16 @@ where
     execution_environments: VariableList<ExecutionEnvironment, T::MaxExecutionEnvironments>,
 
 }
+
+#[cfg(test)]
+mod tests {
+    #[test]
+    fn it_works() {
+        assert_eq!(2 + 2, 4);
+    }
+    #[test]
+    fn can_encode_and_decode_ssz() {
+        assert_eq!(1, 2);
+    }
+}
+
