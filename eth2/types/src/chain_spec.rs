@@ -605,6 +605,7 @@ impl YamlConfig {
 #[cfg(test)]
 mod yaml_tests {
     use super::*;
+    use crate::eth_spec::MinimalEthSpec;
     use std::fs::OpenOptions;
     use tempfile::NamedTempFile;
 

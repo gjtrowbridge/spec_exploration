@@ -16,4 +16,4 @@ typenum = "1.11.2"
 
 [dev-dependencies]
 serde_yaml = "0.8.11"
-#tree_hash_derive = "0.2"
+tree_hash_derive = "0.1"
