@@ -3,9 +3,19 @@ use crate::eth_spec::EthSpec;
 use crate::execution_environment::{ExecutionEnvironment};
 use crate::newtypes::{Root, Slot};
 use serde::{Deserialize, Serialize};
-use ssz_derive::{Decode, Encode};
+use ssz_derive::{Decode as DeriveDecode, Encode as DeriveEncode};
 use ssz_types::{BitVector, FixedVector, VariableList};
 
+#[derive(
+Debug,
+Deserialize,
+Serialize,
+DeriveDecode,
+DeriveEncode,
+)]
+pub struct GregTest {
+    pub a: u32,
+}
 
 /// The state of the `BeaconChain` at some slot.
 /// Full spec is here: https://github.com/ethereum/eth2.0-specs/blob/dev/specs/phase0/beacon-chain.md#beaconstate
@@ -17,9 +27,10 @@ PartialEq,
 Clone,
 Deserialize,
 Serialize,
-Encode,
-Decode,
+DeriveDecode,
+DeriveEncode,
 )]
+#[serde(bound = "T: EthSpec")]
 pub struct BeaconState<T>
 where
     T: EthSpec,
@@ -65,15 +76,38 @@ where
 
 }
 
+impl<T: EthSpec> BeaconState<T> {
+    fn new() -> Self {
+        Self {
+            slot: Slot::new(0),
+            cross_links: FixedVector::from_elem(CrossLink::default()),
+            execution_environments: VariableList::empty(),
+        }
+    }
+}
+
 #[cfg(test)]
 mod tests {
+    use crate::beacon_state::{BeaconState, GregTest};
+    use crate::eth_spec::MainnetEthSpec;
+
     #[test]
     fn it_works() {
         assert_eq!(2 + 2, 4);
     }
+//    #[test]
+//    fn can_encode_and_decode_ssz() {
+//        let bs: BeaconState<MainnetEthSpec> = BeaconState::new();
+////        assert_eq!(bs.is_ssz_fixed_len(), true);
+//        let serialized_bytes: Vec<u8> = bs.as_ssz_bytes();
+////        assert_eq!(serialized_bytes, vec![]);
+//    }
     #[test]
-    fn can_encode_and_decode_ssz() {
-        assert_eq!(1, 2);
+    fn test_serialize() {
+        let t = GregTest {
+            a: 5,
+        };
+        println!("Result: {:?}", t);
     }
 }
 
