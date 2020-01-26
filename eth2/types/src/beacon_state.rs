@@ -2,11 +2,24 @@ use crate::cross_link::{CrossLink};
 use crate::eth_spec::EthSpec;
 use crate::execution_environment::{ExecutionEnvironment};
 use crate::newtypes::{Root, Slot};
+use serde::{Deserialize, Serialize};
+use ssz_derive::{Decode, Encode};
 use ssz_types::{BitVector, FixedVector, VariableList};
+
 
 /// The state of the `BeaconChain` at some slot.
 /// Full spec is here: https://github.com/ethereum/eth2.0-specs/blob/dev/specs/phase0/beacon-chain.md#beaconstate
 /// SSZ spec is here: https://github.com/ethereum/eth2.0-specs/blob/dev/ssz/simple-serialize.md
+
+#[derive(
+Debug,
+PartialEq,
+Clone,
+Deserialize,
+Serialize,
+Encode,
+Decode,
+)]
 pub struct BeaconState<T>
 where
     T: EthSpec,

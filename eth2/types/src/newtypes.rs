@@ -31,6 +31,7 @@ impl_common!(Shard);
 impl_common!(ShardSlot);
 
 construct_fixed_hash! {
+    #[derive(Serialize, Deserialize)]
     pub struct Root(32);
 }
 
@@ -43,5 +44,40 @@ impl Slot {
 impl Epoch {
     pub fn new(slot: u64) -> Self {
         Self(slot)
+    }
+}
+
+impl Decode for Root {
+    fn is_ssz_fixed_len() -> bool {
+        true
+    }
+
+    fn ssz_fixed_len() -> usize {
+        32
+    }
+
+    fn from_ssz_bytes(bytes: &[u8]) -> Result<Self, DecodeError> {
+        let len = bytes.len();
+        let expected = <Self as Decode>::ssz_fixed_len();
+
+        if len != expected {
+            Err(DecodeError::InvalidByteLength { len, expected })
+        } else {
+            Ok(Root::from_slice(bytes))
+        }
+    }
+}
+
+impl Encode for Root {
+    fn is_ssz_fixed_len() -> bool {
+        true
+    }
+
+    fn ssz_fixed_len() -> usize {
+        32
+    }
+
+    fn ssz_append(&self, buf: &mut Vec<u8>) {
+        buf.extend_from_slice(self.as_bytes());
     }
 }
