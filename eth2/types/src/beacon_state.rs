@@ -3,6 +3,8 @@ use crate::eth_spec::EthSpec;
 use crate::execution_environment::{ExecutionEnvironment};
 use crate::newtypes::{Root, Slot};
 use serde::{Deserialize, Serialize};
+use serde_json;
+use ssz::{Decode, Encode};
 use ssz_derive::{Decode as DeriveDecode, Encode as DeriveEncode};
 use ssz_types::{BitVector, FixedVector, VariableList};
 
@@ -88,8 +90,7 @@ impl<T: EthSpec> BeaconState<T> {
 
 #[cfg(test)]
 mod tests {
-    use crate::beacon_state::{BeaconState, GregTest};
-    use crate::eth_spec::MainnetEthSpec;
+    use super::*;
 
     #[test]
     fn it_works() {
@@ -107,7 +108,13 @@ mod tests {
         let t = GregTest {
             a: 5,
         };
+        let json = serde_json::to_string(&t).unwrap();
+        let deserialized: GregTest = serde_json::from_str(&json).unwrap();
         println!("Result: {:?}", t);
+        println!("Serialize: {}", json);
+        println!("Deserialize: {:?}", deserialized);
+
+        let s = (&t).as_ssz_bytes();
     }
 }
 
