@@ -114,7 +114,11 @@ mod tests {
         println!("Serialize: {}", json);
         println!("Deserialize: {:?}", deserialized);
 
-        let s = (&t).as_ssz_bytes();
+        let s: Vec<u8> = (&t).as_ssz_bytes();
+        println!("Result: {:?}", s);
+        let from: GregTest = GregTest::from_ssz_bytes(&s).unwrap();
+
+        println!("From ssz: {:?}", from);
     }
 }
 
