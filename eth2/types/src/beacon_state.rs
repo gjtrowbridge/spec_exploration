@@ -91,18 +91,22 @@ impl<T: EthSpec> BeaconState<T> {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::eth_spec::MainnetEthSpec;
 
     #[test]
     fn it_works() {
         assert_eq!(2 + 2, 4);
     }
-//    #[test]
-//    fn can_encode_and_decode_ssz() {
-//        let bs: BeaconState<MainnetEthSpec> = BeaconState::new();
-////        assert_eq!(bs.is_ssz_fixed_len(), true);
-//        let serialized_bytes: Vec<u8> = bs.as_ssz_bytes();
-////        assert_eq!(serialized_bytes, vec![]);
-//    }
+    #[test]
+    fn can_encode_and_decode_ssz() {
+        let bs: BeaconState<MainnetEthSpec> = BeaconState::new();
+//        assert_eq!(bs.is_ssz_fixed_len(), true);
+        let serialized_bytes: Vec<u8> = bs.as_ssz_bytes();
+        println!("Bytes: {:?}", serialized_bytes);
+        let from: BeaconState<MainnetEthSpec> = BeaconState::from_ssz_bytes(&serialized_bytes).unwrap();
+        println!("from: {:?}", from);
+//        assert_eq!(serialized_bytes, vec![]);
+    }
     #[test]
     fn test_serialize() {
         let t = GregTest {
